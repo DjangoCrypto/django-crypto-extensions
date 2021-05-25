@@ -25,7 +25,7 @@ setup(
     author="DjangoCrypto",
     author_email="kamil1marczak@gmail.com",
     url="https://github.com/DjangoCrypto/django-crypto-extensions",
-    python_requires=">=3.5",
+    python_requires=">=3.6",
     install_requires=requirements,
     classifiers=[
         "Environment :: Web Environment",
