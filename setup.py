@@ -17,9 +17,6 @@ setup(
     version="0.0.1",
     packages=["django_crypto_extensions", "django_crypto_extensions.runtests"],
     include_package_data=True,
-    # extras_require={
-    #     "Base64ImageField": ["Pillow >= 6.2.1"],
-    # },
     license="Apache-2.0",
     license_files=["LICENSE"],
     description="Extension for Django in terms of Cryptography.",
