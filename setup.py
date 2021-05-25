@@ -19,7 +19,7 @@ setup(
     include_package_data=True,
     license="Apache-2.0",
     license_files=["LICENSE"],
-    description="Extension for Django in terms of Cryptography.",
+    description="Extensions for Django in terms of Cryptography.",
     long_description=README,
     long_description_content_type="text/markdown",
     author="DjangoCrypto",
