@@ -4,3 +4,4 @@ pytest-cov
 psycopg2-binary
 mock
 flake8
+sphinx
