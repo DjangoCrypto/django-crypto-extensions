@@ -1,7 +1,7 @@
 import time
 
 from rest_framework import serializers
-from django_crypto_extensions.runtests.drf_fields import (
+from django_crypto_extensions.drf_fields import (
     CryptoBinaryField,
     CryptoCharField,
     _generate_password_key,
