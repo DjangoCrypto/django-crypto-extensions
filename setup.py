@@ -15,7 +15,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 version = __import__("django_crypto_extensions").__version__
 
 setup(
-    name="django-tests-extensions",
+    name="django-crypto-extensions",
     version=version,
     packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     include_package_data=True,
