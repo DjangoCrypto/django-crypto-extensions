@@ -11,7 +11,6 @@ RUN apt-get update && apt-get install -y \
 	python3.7 \
 	python3.8 \
 	python3.9 \
-	gdal-bin \
 	python3-pip
 
 WORKDIR /app

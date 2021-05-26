@@ -1,6 +1,11 @@
 DJANGO-CRYPTO-EXTENSIONS
 ========================
 
+
+.. image:: https://codecov.io/gh/DjangoCrypto/django-crypto-extensions/branch/main/graph/badge.svg?token=kSCQw7h9fi
+    :target: https://codecov.io/gh/DjangoCrypto/django-crypto-extensions
+
+
 .. image:: https://img.shields.io/pypi/v/django-crypto-extensions
     :target: https://pypi.org/project/django-crypto-extensions/1.0.0/
     :alt: PyPI
