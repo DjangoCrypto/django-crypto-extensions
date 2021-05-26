@@ -13,6 +13,7 @@ Welcome to Django Crypto Extensions's documentation!
    1_requirements
    2_installation
    3_usage
+   4_contribution
 
 Indices and tables
 ==================
