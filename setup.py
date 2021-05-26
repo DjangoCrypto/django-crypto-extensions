@@ -1,23 +1,25 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open(os.path.join(os.path.dirname(__file__), "README.md")) as readme:
     README = readme.read()
 
 with open(
-    os.path.join(os.path.dirname(__file__), "requirements.txt")
+        os.path.join(os.path.dirname(__file__), "requirements.txt")
 ) as requirements_txt:
     requirements = requirements_txt.read().strip().splitlines()
 
 # allow setup.py to be run from any path
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
+version = __import__("django_crypto_extensions").__version__
+
 setup(
-    name="django_crypto_extensions",
-    version="0.0.1",
-    packages=["django_crypto_extensions", "django_crypto_extensions.runtests"],
+    name="django-tests-extensions",
+    version=version,
+    packages=find_packages(exclude=['contrib', 'docs', 'tests*']),
     include_package_data=True,
-    license="Apache-2.0",
+    license="MIT",
     license_files=["LICENSE"],
     description="Extensions for Django in terms of Cryptography.",
     long_description=README,

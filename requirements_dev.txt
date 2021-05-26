@@ -1,7 +1,0 @@
-Pillow >= 6.2.1
-pytest-django
-pytest-cov
-psycopg2-binary
-mock
-flake8
-sphinx

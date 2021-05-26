@@ -1,0 +1,10 @@
+Pillow >= 6.2.1
+pytest-django
+pytest-cov
+mock
+flake8
+sphinx
+codecov
+coverage
+psycopg2-binary
+sphinx_rtd_theme

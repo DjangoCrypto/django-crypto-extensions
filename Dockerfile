@@ -7,7 +7,6 @@ RUN apt-get update && apt-get install -y software-properties-common
 RUN add-apt-repository ppa:deadsnakes/ppa
 
 RUN apt-get update && apt-get install -y \
-	python3.5 \
 	python3.6 \
 	python3.7 \
 	python3.8 \
@@ -17,5 +16,5 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-RUN pip3 install --upgrade pip
-RUN pip3 install tox
+RUN python3 -m pip install -U --force-reinstall pip
+RUN pip install tox

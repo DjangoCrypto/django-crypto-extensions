@@ -10,7 +10,9 @@ Welcome to Django Crypto Extensions's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
+   1_requirements
+   2_installation
+   3_usage
 
 Indices and tables
 ==================

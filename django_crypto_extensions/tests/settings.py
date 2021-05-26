@@ -14,6 +14,7 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
+
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",  # Add 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -24,7 +25,6 @@ DATABASES = {
         "PORT": "",  # Set to empty string for default. Not used with sqlite3.
     }
 }
-
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
@@ -64,7 +64,7 @@ MEDIA_ROOT = ""
 MEDIA_URL = ""
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = "django-insecure-(51cs*0du9buh)4l899fxx#3e6=1-f^$k60%q%!v!&l&-d8r(6"
+SECRET_KEY = "u@x-aj9(hoh#rb-^ymf#g2jx_hp0vj7u5#b@ag1n^seu9e!%cy"
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -105,8 +105,8 @@ INSTALLED_APPS = (
     # 'rest_framework.tests.accounts',
     # 'rest_framework.tests.records',
     # 'rest_framework.tests.users',
+    "django_crypto_extensions.tests.apps.DjangoCryptoExtensionsConfig"
 )
-
 
 STATIC_URL = "/static/"
 

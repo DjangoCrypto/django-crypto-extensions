@@ -1,5 +1,5 @@
 Django >= 2.2
 djangorestframework >= 3.9.2
-cryptography==3.2.1
+cryptography == 3.4.7
 
 setuptools==57.0.0

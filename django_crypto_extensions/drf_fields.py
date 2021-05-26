@@ -9,6 +9,7 @@ from rest_framework import serializers
 
 EMPTY_VALUES = (None, "", [], (), {})
 DEFAULT_PASSWORD = b"Non_nobis1solum?nati!sumus"
+
 DEFAULT_SALT = settings.SECRET_KEY
 
 
@@ -58,7 +59,7 @@ class CryptoBinaryField(serializers.Field):
     """
 
     type_name = "CryptoBinaryField"
-    type_label = "crypto"
+    type_label = "tests"
 
     default_error_messages = {
         "invalid": _("Input a valid data"),
