@@ -1,8 +1,8 @@
 DJANGO-CRYPTO-EXTENSIONS
 ========================
 
-
 .. image:: https://img.shields.io/pypi/v/django-crypto-extensions
+    :target: https://pypi.org/project/django-crypto-extensions/1.0.0/
     :alt: PyPI
 
 .. image:: https://img.shields.io/pypi/pyversions/django-crypto-extensions
