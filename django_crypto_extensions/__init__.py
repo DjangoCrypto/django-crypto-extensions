@@ -5,7 +5,7 @@
 #
 default_app_config = 'django_crypto_extensions.tests.apps.DjangoCryptoExtensionsConfig'
 
-VERSION = (1, 0, 0)
+VERSION = (1, 0, 1)
 
 
 def get_version(version):
