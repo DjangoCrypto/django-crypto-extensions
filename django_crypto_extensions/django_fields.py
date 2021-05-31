@@ -1,4 +1,5 @@
 import pickle
+
 try:
     from functools import cached_property as property_decorator
 except ImportError:
@@ -30,6 +31,9 @@ __all__ = [
     "CryptoSmallIntegerField",
 ]
 
+DEFAULT_PASSWORD = "Non_nobis1solum?nati!sumus"
+DEFAULT_SALT_ENV = "SECRET_KEY"
+
 
 def to_bytes(_obj):
     if isinstance(_obj, bytes):
@@ -49,18 +53,30 @@ class CryptoFieldMixin(models.Field):
     Cryptography protocol used in mixin: Fernet (symmetric encryption) provided by Cryptography (pyca/cryptography)
     """
 
-    def __init__(self, salt_settings_env=None, password=None, *args, **kwargs):
+    def __init__(self, salt_settings_env=DEFAULT_SALT_ENV, password=DEFAULT_PASSWORD, password_field=None, *args,
+                 **kwargs):
 
         if salt_settings_env and not isinstance(salt_settings_env, str):
             raise ImproperlyConfigured("'salt_settings_env' must be a string")
         self.salt_settings_env = salt_settings_env
-        self.password = "Password123!!!"
+
+        if password_field and not isinstance(password_field, str):
+            raise ImproperlyConfigured("'password_field' must be a string or int")
+
+        self.password_field = password_field
+        # if password_field:
+        #     self.password_field = password_field
+            # self.password = self.get_password_from_field()
 
         if password and not isinstance(password, (str, int)):
             raise ImproperlyConfigured("'password' must be a string or int")
 
-        if password:
-            self.password = password
+        # if password and password_field:
+        #     raise ImproperlyConfigured("'password' must remain empty if 'password_field' ha been set")
+
+        # if password_field is None and password:
+        # if password:
+        self.password = password
 
         if kwargs.get("primary_key"):
             raise ImproperlyConfigured(
@@ -77,32 +93,37 @@ class CryptoFieldMixin(models.Field):
         kwargs["null"] = True  # should be nullable, in case data field is nullable.
         kwargs["blank"] = True
 
-        self.salt = "Salt123!!!"
-
         self.get_salt()
 
         self._internal_type = "BinaryField"
         super().__init__(*args, **kwargs)
 
-    def get_salt(self):
-        if self.salt_settings_env:
-            try:
-                self.salt = getattr(settings, self.salt_settings_env)
-            except AttributeError:
-                raise Error(
-                    f"salt_settings_env {self.salt_settings_env} is not set in settings file"
-                )
-        else:
-            pass
+    # def has_default(self):
+    #     """Always use the EncryptedFields default"""
+    #     return self.model._meta.get_field(self.password_field).has_default()
+    #
+    # def get_default(self):
+    #     """Always use EncryptedField's default."""
+    #     return self.model._meta.get_field(self.password_field).get_default()
 
-    def deconstruct(self):
-        name, path, args, kwargs = super().deconstruct()
-        # Only include kwarg if it's not the default (None)
-        if self.salt_settings_env:
-            kwargs["salt_settings_env"] = self.salt_settings_env
-        if self.password:
-            kwargs["password"] = self.password
-        return name, path, args, kwargs
+    def get_salt(self):
+        try:
+            self.salt = getattr(settings, self.salt_settings_env)
+        except AttributeError:
+            raise Error(
+                f"salt_settings_env {self.salt_settings_env} is not set properly"
+            )
+
+    # def pre_save(self, model_instance, add):
+    #     """Save the original_value."""
+    #     if self.password_field:
+    #         password_field = getattr(model_instance, self.password_field)
+    #         setattr(model_instance, self.attname, password_field)
+    #     else:
+    #         pass
+    #     return super(CryptoFieldMixin, self).pre_save(model_instance, add)
+
+
 
     def generate_password_key(self, password, salt):
         # password = b"password"
@@ -139,9 +160,35 @@ class CryptoFieldMixin(models.Field):
             value = ""
         value = super().get_db_prep_value(value, connection, prepared=False)
         if value is not None:
+            if self.password_field:
+                self.password = models._meta.get_field(self.password_field)
             encrypted_value = self.encrypt(value)
             return encrypted_value
             # return connection.Database.Binary(encrypted_value)
+
+    # def get_password_from_field(self, model_instance, add):
+    #     # return getattr(settings, self.password_settings)
+    #     if self.password_field:
+    #         self.password = model_instance._meta.get_field(self.password_field)
+    #     pass
+        # try:
+        #     # return self.model._meta.get_field(self.password_field)
+        #     return self.model._meta.get_field(self.password_settings)
+        # except AttributeError:
+        #     raise Error(
+        #         f"password_field {self.password_settings} is not set properly"
+        #     )
+
+    # def pre_save(self, model_instance, add):
+    #
+    #     if self.password_field:
+    #         self.password = model_instance._meta.get_field(self.password_field)
+    #         # self.get_password_from_field(model_instance, add)
+    #     return super(CryptoFieldMixin, self).pre_save(model_instance, add)
+        # encrypted_value = self.encrypt(self.attname)
+        # if self.empty_strings_allowed and encrypted_value == bytes():
+        #     return ""
+        # return encrypted_value
 
     def from_db_value(self, value, expression, connection):
         if value is not None:
@@ -157,6 +204,15 @@ class CryptoFieldMixin(models.Field):
             return super().validators
         finally:
             self._internal_type = "BinaryField"
+
+    def deconstruct(self):
+        name, path, args, kwargs = super().deconstruct()
+        # Only include kwarg if it's not the default (None)
+        if self.salt_settings_env:
+            kwargs["salt_settings_env"] = self.salt_settings_env
+        # if self.password:
+        #     kwargs["password"] = self.password
+        return name, path, args, kwargs
 
 
 class CryptoTextField(CryptoFieldMixin, models.TextField):

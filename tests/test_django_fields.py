@@ -8,8 +8,12 @@ from django_crypto_extensions.tests.models import (
     CryptoTextModel,
     CryptoTextModelPassword,
     CryptoAllFieldModel,
+    CryptoTextModelPasswordFromField
 )
 
+from django.conf import settings
+
+DEFAULT_PASSWORD = "Non_nobis1solum?nati!sumus"
 
 class CryptoFieldTest(TestCase):
     def test_char_field_create(self):
@@ -84,6 +88,12 @@ class CryptoFieldTest(TestCase):
     def test_password_salt(self):
         c_text = CryptoTextField()
         c2_text = CryptoTextField(password="password_to_be_used_as_key")
-        self.assertEqual("Password123!!!", c_text.password)
-        self.assertEqual("Salt123!!!", c_text.salt)
+        self.assertEqual(DEFAULT_PASSWORD, c_text.password)
+        self.assertEqual(settings.SECRET_KEY, c_text.salt)
         self.assertEqual("password_to_be_used_as_key", c2_text.password)
+
+    def test_password_field(self):
+        k = CryptoTextModelPasswordFromField(text_field="RandomTextField123!")
+        self.assertEqual("password_field_to_be_used_as_key", k.password)
+        self.assertEqual("password_field_to_be_used_as_key", k.text_field)
+
