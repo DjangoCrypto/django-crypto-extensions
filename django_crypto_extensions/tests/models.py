@@ -20,7 +20,19 @@ class CryptoTextModel(models.Model):
 
 
 class CryptoTextModelPassword(models.Model):
+    # text_field = CryptoTextField(password="password_to_be_used_as_key")
     text_field = CryptoTextField(password="password_to_be_used_as_key")
+
+
+class CryptoTextModelPasswordFromField(models.Model):
+
+    @property
+    def password(self):
+        return "password_field_to_be_used_as_key"
+
+    # text_field = CryptoTextField(password_settings="SECRET_KEY")
+    text_field = CryptoTextField(password_field="password")
+    text_field2 = CryptoTextField(password="password_field_to_be_used_as_key")
 
 
 class CryptoAllFieldModel(models.Model):
