@@ -95,5 +95,4 @@ class CryptoFieldTest(TestCase):
     def test_password_field(self):
         k = CryptoTextModelPasswordFromField(text_field="RandomTextField123!")
         self.assertEqual("password_field_to_be_used_as_key", k.password)
-        self.assertEqual("password_field_to_be_used_as_key", k.text_field)
 
