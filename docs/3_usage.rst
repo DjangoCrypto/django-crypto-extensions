@@ -36,6 +36,7 @@ Example of how to use to create custom CryptoTextField::
 + each CryptoField has 2 kwargs ``salt_settings_env`` and ``password``.
 + salt_settings_env - name of variable stored in ``settings.py`` file, which will be used as cryptographic salt. ``default: salt_settings_env = 'SECRET_KEY'`` if settings not set or no SECRET_KEY in setting ``default: salt = "Salt123!!!"``
 + password - password to be used in encryption process of given field (together with salt set globally) ``default = 'password'``
++ password_field - name of field from which to import password. It i most recommended to ue @property instead of actual field
 
 **Example**::
 
@@ -49,6 +50,22 @@ Example of how to use to create custom CryptoTextField::
 
         value = CryptoEmailField(salt_settings_env='NEW_SECRET_KEY', password='new_password')
 
+
+**Example2**::
+
+    # models.py
+
+    from django.db import models
+
+    from django_crypto_extensions.django_fields import CryptoEmailField
+
+    class CryptoTextModelPasswordFromField(models.Model):
+
+        @property
+        def password(self):
+            return "password_field_to_be_used_as_key"
+
+        value = CryptoTextField(password_field="password")
 
 CryptoBinaryField and CryptoCharField
 ---------------------------------------
