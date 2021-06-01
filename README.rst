@@ -29,3 +29,9 @@ For more information on installation and configuration see the documentation at:
 
 https://django-crypto-extensions.readthedocs.io/
 
+Contribute
+----------
+
+If you want to join `DjangoCrypto <https://github.com/DjangoCrypto>`_, have idea and/or suggestions please write kamil1marczak@gmail.com
+
+

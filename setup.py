@@ -31,7 +31,7 @@ setup(
     include_package_data=True,
     license="MIT",
     license_files=["LICENSE"],
-    description="Extensions for Django in terms of Cryptography.",
+    description="""Package of django tools related to encryption""",
     long_description=README,
     long_description_content_type="text/markdown",
     author="DjangoCrypto",
