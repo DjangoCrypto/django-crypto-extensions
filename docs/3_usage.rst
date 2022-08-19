@@ -5,7 +5,7 @@ Usage
 
 Django Models CryptoField Package
 ---------------------------------------
-A set of generic common Djano Fields that automatically encrypt data for database amd encrypt for the purpose of usage in Django:
+A set of generic common Djano Fields that automatically encrypt data for database and encrypt for the purpose of usage in Django:
 
 + ``CryptoFieldMixin`` - Mixin that implement encrypt/decrypt methods.
 
